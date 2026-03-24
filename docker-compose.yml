@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./apps/server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - FRONTEND_URL=http://localhost:3000
+    volumes:
+      - uploads:/app/uploads
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_SERVER_URL=http://localhost:3001
+    depends_on:
+      - server
+
+volumes:
+  uploads:

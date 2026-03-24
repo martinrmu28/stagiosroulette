@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* === FONDS === */
+  --bg-deep:        #0B1120;
+  --bg-surface:     #111B2E;
+  --bg-elevated:    #152238;
+
+  /* === GLASS === */
+  --glass-bg:       rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --glass-border:   rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glass-blur:     40px;
+
+  /* === AMBRE (accent primaire) === */
+  --amber-500:      #F59E0B;
+  --amber-600:      #D97706;
+  --amber-glow:     rgba(217, 119, 6, 0.15);
+  --amber-surface:  rgba(217, 119, 6, 0.06);
+  --amber-border:   rgba(217, 119, 6, 0.20);
+  --amber-text:     rgba(245, 158, 11, 0.8);
+
+  /* === BLEU (ambiance) === */
+  --blue-glow:      rgba(59, 130, 246, 0.08);
+  --blue-accent:    #60A5FA;
+
+  /* === COULEURS JOUEURS === */
+  --player-0: #3B82F6;
+  --player-1: #EC4899;
+  --player-2: #10B981;
+  --player-3: #8B5CF6;
+  --player-4: #06B6D4;
+  --player-5: #F43F5E;
+  --player-6: #84CC16;
+  --player-7: #F97316;
+
+  /* === FEEDBACK === */
+  --success: #10B981;
+  --danger:  #EF4444;
+
+  /* === TEXTE === */
+  --text-primary:   #F1F5F9;
+  --text-secondary: rgba(255, 255, 255, 0.5);
+  --text-tertiary:  rgba(255, 255, 255, 0.35);
+  --text-muted:     rgba(255, 255, 255, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ===== GLASS UTILITIES ===== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-amber {
+  background: var(--amber-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--amber-border);
+}
+
+.glass-elevated {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-hover);
+}
+
+.glass-outline {
+  background: transparent;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-hover);
+}
+
+/* ===== BACKGROUND ORBS ===== */
+.orb-amber {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: orb-float 8s ease-in-out infinite;
+}
+
+.orb-blue {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  animation: orb-float 10s ease-in-out infinite reverse;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -15px) scale(1.05); }
+  66% { transform: translate(-10px, 10px) scale(0.97); }
+}
+
+/* ===== TIMER BORDER ===== */
+@keyframes timer-border {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 1; }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ===== CONFETTI ===== */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  animation: confetti-fall linear forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===== PULSE AMBER ===== */
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(217, 119, 6, 0); }
+}
+.pulse-amber { animation: pulse-amber 2s ease-in-out infinite; }
+
+/* ===== SHAKE ===== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+.shake { animation: shake 0.4s ease-in-out; }
